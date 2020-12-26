@@ -175,7 +175,7 @@ trait HasCompositePrimaryKey
      *
      * @param array|int $ids
      *
-     *@throws WrongKeyException
+     * @throws WrongKeyException
      * @throws MissingPrimaryKeyValueException
      *
      * @return Builder
@@ -228,11 +228,11 @@ trait HasCompositePrimaryKey
      *
      * @param Builder $query
      *
-     *@throws MissingPrimaryKeyValueException
+     * @throws MissingPrimaryKeyValueException
      *
      * @return Builder
      */
-    protected function setKeysForSaveQuery(Builder $query)
+    protected function setKeysForSaveQuery($query)
     {
         foreach ($this->getRawKeyName() as $key) {
             if (isset($this->{$key})) {
