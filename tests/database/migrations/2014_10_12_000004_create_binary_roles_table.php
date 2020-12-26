@@ -14,7 +14,6 @@ class CreateBinaryRolesTable extends Migration
         Schema::create('binary_roles', function (Blueprint $table) {
             $table->binary('role_id');
             $table->string('name');
-            $table->unsignedInteger('counter')->default(0);
         });
     }
 

@@ -228,16 +228,9 @@ trait CompositeRelationships
      *
      * @return BelongsToMany
      */
-    protected function newBelongsToMany(
-        Builder $query,
-        Model $parent,
-        $table,
-        $foreignPivotKey,
-        $relatedPivotKey,
-        $parentKey,
-        $relatedKey,
-        $relationName = null
-    ) {
+    protected function newBelongsToMany(Builder $query, Model $parent, $table, $foreignPivotKey, $relatedPivotKey,
+        $parentKey, $relatedKey, $relationName = null)
+    {
         return $this->executeWithinOptionalBinaryTransformation(function () use ($query, $parent, $table, $foreignPivotKey, $relatedPivotKey, $parentKey, $relatedKey, $relationName) {
             return new CompositeBelongsToMany($query, $parent, $table, $foreignPivotKey, $relatedPivotKey, $parentKey, $relatedKey, $relationName);
         }, $query->getModel(), $parent);
@@ -259,32 +252,14 @@ trait CompositeRelationships
      *
      * @return MorphToMany
      */
-    protected function newMorphToMany(
-        Builder $query,
-        Model $parent,
-        $name,
-        $table,
-        $foreignPivotKey,
-        $relatedPivotKey,
-        $parentKey,
-        $relatedKey,
-        $relationName = null,
-        $inverse = false
-    ) {
+    protected function newMorphToMany(Builder $query, Model $parent, $name, $table, $foreignPivotKey,
+        $relatedPivotKey, $parentKey, $relatedKey,
+        $relationName = null, $inverse = false)
+    {
         return $this->executeWithinOptionalBinaryTransformation(function () use ($query, $parent, $name, $table, $foreignPivotKey, $relatedPivotKey, $parentKey, $relatedKey,
             $relationName, $inverse) {
-            return new MorphToMany(
-                $query,
-                $parent,
-                $name,
-                $table,
-                $foreignPivotKey,
-                $relatedPivotKey,
-                $parentKey,
-                $relatedKey,
-                $relationName,
-                $inverse
-            );
+            return new MorphToMany($query, $parent, $name, $table, $foreignPivotKey, $relatedPivotKey, $parentKey, $relatedKey,
+                $relationName, $inverse);
         }, $query->getModel(), $parent);
     }
 }

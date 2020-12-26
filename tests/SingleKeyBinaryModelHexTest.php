@@ -25,19 +25,6 @@ class SingleKeyBinaryModelHexTest extends CompositeKeyBaseUnit
     }
 
     /** @test */
-    public function validateManyModelLookup()
-    {
-        /**
-         * @var TestBinaryRoleHex
-         */
-        $model = TestBinaryRoleHex::findMany([md5(1)])->first();
-        $this->assertNotNull($model);
-        $this->assertInstanceOf(TestBinaryRoleHex::class, $model);
-
-        return $model;
-    }
-
-    /** @test */
     public function validateSingleModelLookup()
     {
         /**
@@ -89,25 +76,5 @@ class SingleKeyBinaryModelHexTest extends CompositeKeyBaseUnit
         $model = TestBinaryRoleHex::find(md5(1));
         $this->assertNotNull($model->users);
         $this->assertNotNull($model->hex_users);
-    }
-
-    /** @test
-     *  @depends  validateSingleModelLookup
-     */
-    public function incrementingTest(TestBinaryRoleHex $model)
-    {
-        $model->increment('counter');
-        $model->refresh();
-        $this->assertEquals(1, $model->counter);
-    }
-
-    /** @test
-     *  @depends validateSingleModelLookup
-     */
-    public function decrementingTest(TestBinaryRoleHex $model)
-    {
-        $model->decrement('counter');
-        $model->refresh();
-        $this->assertEquals(-1, $model->counter);
     }
 }

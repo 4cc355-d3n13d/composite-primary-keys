@@ -18,7 +18,6 @@ class CreateBinaryUsersTable extends Migration
             $table->unsignedInteger('role_id');
             $table->binary('binary_role_id')->nullable();
             $table->string('name')->unique();
-            $table->unsignedInteger('counter')->default(0);
         });
     }
 

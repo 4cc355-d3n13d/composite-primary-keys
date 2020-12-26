@@ -12,10 +12,7 @@ use MaksimM\CompositePrimaryKeys\Scopes\CompositeKeyScope;
 
 trait HasCompositePrimaryKey
 {
-    use NormalizedKeysParser;
-    use PrimaryKeyInformation;
-    use CompositeRelationships;
-    use OptionalBinaryTransformation;
+    use NormalizedKeysParser, PrimaryKeyInformation, CompositeRelationships, OptionalBinaryTransformation;
 
     /**
      * Automatically generate unique binary id.
@@ -266,7 +263,7 @@ trait HasCompositePrimaryKey
         $this->incrementOrDecrementAttributeValue($column, $amount, $extra, $method);
 
         foreach ($this->getRawKeyName() as $key) {
-            $query->where($key, $this->getOriginal($key));
+            $query->where($key, $this->getAttribute($key));
         }
 
         return $query->{$method}($column, $amount, $extra);

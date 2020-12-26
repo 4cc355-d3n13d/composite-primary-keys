@@ -2,8 +2,6 @@
 
 namespace MaksimM\CompositePrimaryKeys\Tests;
 
-use MaksimM\CompositePrimaryKeys\Tests\Stubs\TestBinaryUser;
-use MaksimM\CompositePrimaryKeys\Tests\Stubs\TestBinaryUserHex;
 use MaksimM\CompositePrimaryKeys\Tests\Stubs\TestUser;
 
 class UpdatesTest extends CompositeKeyBaseUnit
@@ -20,40 +18,6 @@ class UpdatesTest extends CompositeKeyBaseUnit
         ]);
         $this->assertNotNull($model);
         $this->assertInstanceOf(TestUser::class, $model);
-        $this->assertEquals(0, $model->counter);
-
-        return $model;
-    }
-
-    /** @test */
-    public function validateEmptyCounterBinaryModel()
-    {
-        /**
-         * @var TestBinaryUser
-         */
-        $model = TestBinaryUser::find([
-            'user_id'         => md5(20000, true),
-            'organization_id' => 100,
-        ]);
-        $this->assertNotNull($model);
-        $this->assertInstanceOf(TestBinaryUser::class, $model);
-        $this->assertEquals(0, $model->counter);
-
-        return $model;
-    }
-
-    /** @test */
-    public function validateEmptyCounterBinaryModelHex()
-    {
-        /**
-         * @var TestBinaryUserHex
-         */
-        $model = TestBinaryUserHex::find([
-            'user_id'         => md5(20000),
-            'organization_id' => 100,
-        ]);
-        $this->assertNotNull($model);
-        $this->assertInstanceOf(TestBinaryUserHex::class, $model);
         $this->assertEquals(0, $model->counter);
 
         return $model;
@@ -79,54 +43,6 @@ class UpdatesTest extends CompositeKeyBaseUnit
         $model->decrement('counter');
         $model->refresh();
         $this->assertEquals(-1, $model->counter);
-    }
-
-    /** @test
-     *  @depends validateEmptyCounterBinaryModel
-     */
-    public function incrementingBinaryTest(TestBinaryUser $model)
-    {
-        $model->increment('counter');
-        $model->refresh();
-        $this->assertEquals(1, $model->counter);
-
-        return $model;
-    }
-
-    /** @test
-     *  @depends validateEmptyCounterBinaryModel
-     */
-    public function decrementingBinaryTest(TestBinaryUser $model)
-    {
-        $model->decrement('counter');
-        $model->refresh();
-        $this->assertEquals(-1, $model->counter);
-
-        return $model;
-    }
-
-    /** @test
-     *  @depends validateEmptyCounterBinaryModelHex
-     */
-    public function incrementingBinaryHexTest(TestBinaryUserHex $model)
-    {
-        $model->increment('counter');
-        $model->refresh();
-        $this->assertEquals(1, $model->counter);
-
-        return $model;
-    }
-
-    /** @test
-     *  @depends validateEmptyCounterBinaryModelHex
-     */
-    public function decrementingBinaryHexTest(TestBinaryUserHex $model)
-    {
-        $model->decrement('counter');
-        $model->refresh();
-        $this->assertEquals(-1, $model->counter);
-
-        return $model;
     }
 
     /** @test
